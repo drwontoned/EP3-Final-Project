@@ -72,6 +72,7 @@ void draw(){
 
 void keyPressed() {
   if (inputData.equals(ask)) {
+    dot = 0;
     if(ask.equals("Sorry the max amount of liquids is 20")){
      checkInput = 1;
     }else{
@@ -198,7 +199,11 @@ void drawFluid(){
   int liquidColor = (175/num);
   for(int i = 0; i < numOfLiquids; i = i+1){
     fill(0,150-(liquidColor*i),200-(liquidColor*i));    
-    rect(50+20, top[i], 300, percent[i]);
+    if(percent[i] >1){
+      rect(50+20, top[i], 300, percent[i]);
+    }else{
+      line(70,top[i],300,top[i]);
+    }
   }
   for(int i = 0; i < numOfLiquids; i = i+1){
     fill(0);
@@ -209,7 +214,9 @@ void drawFluid(){
       LR = 390;
     }
     if(density[i] != 0){
-      text(""+((top[i+1]-top[i])/100)+" m",LR,((top[i+1]-top[i])/2)+top[i]);
+      if(((top[i+1]-top[i])/100) > 0.009){
+        text(""+((top[i+1]-top[i])/100)+" m",LR,((top[i+1]-top[i])/2)+top[i]);
+      }
     }
   }  
 }
